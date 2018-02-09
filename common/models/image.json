@@ -1,0 +1,35 @@
+{
+  "name": "Image",
+  "plural": "Images",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string",
+      "required": true
+    },
+    "versions": {
+      "type": [{
+        "hmac": "string",
+        "original": "string"
+      }]
+    },
+    "meta": {
+      "type": "object"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

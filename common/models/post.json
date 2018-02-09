@@ -1,0 +1,57 @@
+{
+  "name": "Post",
+  "plural": "Posts",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "Timestamp": {},
+    "LocaleFields": {
+      "fields": [
+        "title"
+      ]
+    },
+    "LocaleBodyConstructor": {}
+  },
+  "properties": {
+    "category": {
+      "type": "string",
+      "required": true,
+      "index": true
+    },
+    "path": {
+      "type": "string",
+      "index": true
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "index": true
+    },
+    "image": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "author": {
+      "type": "belongsTo",
+      "model": "Person",
+      "foreignKey": "authorId"
+    },
+    "whoLikes": {
+      "type": "hasMany",
+      "model": "Person",
+      "foreignKey": ""
+    },
+    "comments": {
+      "type": "hasMany",
+      "model": "Comment",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

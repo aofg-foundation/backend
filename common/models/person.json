@@ -1,0 +1,35 @@
+{
+  "name": "Person",
+  "plural": "Persons",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "createdPages": {
+      "type": "hasMany",
+      "model": "Page",
+      "foreignKey": ""
+    },
+    "likedPages": {
+      "type": "hasMany",
+      "model": "Page",
+      "foreignKey": ""
+    },
+    "createdPosts": {
+      "type": "hasMany",
+      "model": "Post",
+      "foreignKey": ""
+    },
+    "likedPosts": {
+      "type": "hasMany",
+      "model": "Post",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
