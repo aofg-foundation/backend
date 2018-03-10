@@ -1,4 +1,4 @@
-const { locales } = require('../config.json')
+const { locales } = require('../config')
 
 module.exports = function (app) {
   // const ds = app.dataSources

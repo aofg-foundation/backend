@@ -5,7 +5,8 @@ module.exports = function (Model, options) {
   Model.observe('before save', function (ctx, next) {
     if (ctx.instance) {
       ctx.instance.unsetAttribute('createdAt')
-      ctx.instance.modifiedAt = Date.now()
+      ctx.instance.modifiedAt = Date.now() 
+      ctx.instance.createdAt = Date.now()
     } else {
       delete ctx.data.createdAt
       ctx.data.modifiedAt = Date.now()

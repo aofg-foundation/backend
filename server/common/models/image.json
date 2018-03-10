@@ -6,6 +6,9 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "Timestamp": {}
+  },
   "properties": {
     "title": {
       "type": "string",
@@ -16,13 +19,29 @@
     },
     "path": {
       "type": "string",
+      "required": true,
+      "index": true
+    },
+    "size": {
+      "type": "number",
       "required": true
     },
+    "container": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
     "versions": {
-      "type": [{
-        "hmac": "string",
-        "original": "string"
-      }]
+      "type": [
+        {
+          "hmac": "string",
+          "original": "string"
+        }
+      ]
     },
     "meta": {
       "type": "object"

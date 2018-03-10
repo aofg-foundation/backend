@@ -13,11 +13,20 @@
     "user": "",
     "connector": "mongodb"
   },
-  "storage": {
-    "name": "storage",
+  "loopback-component-storage": {
+    "name": "loopback-component-storage",
     "connector": "loopback-component-storage",
     "provider": "filesystem",
     "root": "./server/storage",
     "maxFileSize": "10485760"
+  },
+  "redis": {
+    "host": "localhost",
+    "port": 6379,
+    "url": "redis://localhost:6379",
+    "password": "",
+    "name": "redis",
+    "db": null,
+    "connector": "kv-redis"
   }
 }

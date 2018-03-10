@@ -5,8 +5,11 @@ services:
     volumes:
       - logs:/logs
       - data:/data
+    ports:
+      - 8000:8000
     environment:
-      - ALLOW_UNSAFE_URL=False
+      - ALLOW_UNSAFE_URL=True
+      # - ALLOW_UNSAFE_URL=False
       - SECURITY_KEY=SECURIZE_ME
       # - URL_SIGNER=libthumbor.url_signers.base64_hmac_sha1
       - RESULT_STORAGE=thumbor.result_storages.file_storage
@@ -14,7 +17,7 @@ services:
       - LOG_LEVEL=debug
       - STORAGE_EXPIRATION_SECONDS=3600
       - RESULT_STORAGE_EXPIRATION_SECONDS=3600
-      - FILTERS=['thumbor.filters.quality', 'thumbor.filters.noise', 'thumbor.filters.blur']
+      - FILTERS=['thumbor.filters.quality', 'thumbor.filters.noise', 'thumbor.filters.blur', 'thumbor.filters.fill', 'thumbor.filters.max_bytes']
 
       # - UPLOAD_ENABLED=True
       # - UPLOAD_PHOTO_STORAGE=thumbor.storages.file_storage
@@ -39,52 +42,19 @@ services:
       # - RESULT_STORAGE_EXPIRATION_SECONDS=None
       # - MIXED_STORAGE_DETECTOR_STORAGE=tc_redis.storages.redis_storage
       # - SENTRY_DSN_URL= # put your sentry enpoint here
-    links:
-      - redis:redis
-    restart: always
-    networks:
-      - frontend
-  nginx:
-    image: apsl/thumbor-nginx:latest
-    links:
-      - thumbor:thumbor
-    volumes_from:
-      - thumbor
-    ports:
-      - "80:80" # nginx cache port (with failover to thumbor)
-    hostname: nginx
-    networks:
-      - frontend
+    # links:
+      # - redis:redis
+      # - backend
+  mongo:
+    image: mongo:latest
+    ports: 
+      - 27017:27017
   redis:
     image: redis:latest
-    restart: always
-    networks:
-      - frontend
-      - backend
-  # remotecv:
-  #   image: apsl/remotecv:latest
-  #   links:
-  #     - redis:redis
-  #   environment:
-  #     - REMOTECV_REDIS_HOST=redis
-  #     - REMOTECV_REDIS_PORT=6379
-  #     - REMOTECV_REDIS_DATABASE=0
-  #     - SENTRY_URL= # put your sentry enpoint here
-  #     - REMOTECV_LOADER=remotecv_aws.loader
-  #     - AWS_ACCESS_KEY_ID= # put your AWS_ACCESS_KEY here
-  #     - AWS_SECRET_ACCESS_KEY= # put your AWS_SECRET_ACCESS_KEY here
-  #     - AWS_LOADER_BUCKET=bucket-name
-  #     # - LOG_LEVEL: DEBUG
-  #   restart: always
-  #   networks:
-  #     - backend
+    ports:
+      - 6379:6379
 volumes:
   data:
     driver: local
   logs:
     driver: local
-networks:
-  frontend:
-    driver: bridge
-  backend:
-    driver: bridge

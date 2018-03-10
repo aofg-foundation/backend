@@ -1,4 +1,4 @@
-const { locales } = require('../../server/config.json')
+const { locales } = require('../../config')
 
 const bodyPart = {
   component: String,

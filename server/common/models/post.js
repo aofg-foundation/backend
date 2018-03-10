@@ -1,5 +1,5 @@
 'use strict';
-const { defaultLocale } = require('../../server/config.json')
+const { defaultLocale } = require('../../config')
 const slug = require('slug')
 
 function guid() {

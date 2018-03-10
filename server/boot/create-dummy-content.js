@@ -1,4 +1,4 @@
-const { admin } = require('../config.json')
+const { admin } = require('../config')
 
 const { promisify } = require('util')
 const slug = require('slug')
