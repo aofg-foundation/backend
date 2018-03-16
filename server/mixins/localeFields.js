@@ -1,4 +1,4 @@
-const { locales } = require('../../config')
+const { locales } = require('../config')
 
 const localeStringType = locales.reduce((acc, locale) => {
   acc[locale] = String

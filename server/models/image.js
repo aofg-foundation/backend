@@ -2,7 +2,7 @@
 
 const ThumborClient = require('../utils/thumbor-url-builder')
 const Boom = require('boom')
-const config = require('../../config')
+const config = require('../config')
 const request = require('request')
 
 const THUMBOR_SECRET = process.env.THUMBOR_SECRET || 'SECURIZE_ME'

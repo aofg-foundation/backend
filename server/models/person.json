@@ -6,7 +6,11 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "address": {
+      "type": "string"
+    }
+  },
   "validations": [],
   "relations": {
     "createdPages": {

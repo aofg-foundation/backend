@@ -28,5 +28,11 @@
     "name": "redis",
     "db": null,
     "connector": "kv-redis"
+  },
+  "emailer": {
+    "name": "emailer",
+    "connector": "loopback-connector-mailgun",
+    "apikey": "key-9e86b1b34e31e1cd3242c1e027ead6e9",
+    "domain": "mg.aofg.cc"
   }
 }

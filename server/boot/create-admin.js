@@ -1,12 +1,8 @@
 const config = require('../config')
 
-const email = config.admin.email
-const password = config.admin.password
-
-console.log({
-  email,
-  password
-})
+const { email, password } = config.admin
+const { addresses } = config
+const adminData = { email, password, address: addresses[0] }
 
 /**
  * Create the first admin user if there are not users in the system
@@ -15,13 +11,11 @@ module.exports = function createAdmin(server) {
   const Person = server.models.Person
   const Role = server.models.Role
   const RoleMapping = server.models.RoleMapping
-
   return Person
-    .find()
+    .destroyAll()
     .then(accounts => {
-      if (accounts.length < 1) {
-        return Person.create({email, password})
-      }
+      console.log('create admin', adminData)
+      return Person.create(adminData)
     })
     .then(account => {
       if (account) {
