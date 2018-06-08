@@ -4,21 +4,19 @@ const { promisify } = require('util')
 const slug = require('slug')
 const faker = require('faker')
 
-
-function guid() {
-  function s4() {
+function guid () {
+  function s4 () {
     return Math.floor((1 + Math.random()) * 0x10000)
       .toString(16)
       .substring(1)
   }
-  return s4() + s4();
+  return s4() + s4()
 }
 
-function fakerLocale(locale) {
+function fakerLocale (locale) {
   faker.locale = locale
   return faker
 }
-
 
 module.exports = async function (app) {
   console.log('Migrate dummy content')
@@ -42,7 +40,7 @@ module.exports = async function (app) {
     address: '0x5759ba39bbeb163930b4d6d1f894e5f6a710ec5c',
     password: '12345',
     email: 'info@aofg.cc',
-    emailVerified: true  
+    emailVerified: true
   })
 
   const persons = await createPerson(personsData)
@@ -58,13 +56,13 @@ module.exports = async function (app) {
       slug: slug(fakerLocale('en').hacker.phrase()) + '-' + guid(),
       body: {
         en: Array(10).fill(0).map((_, index) => ({
-          component: index != 0 ? 'p' : 'blockquote', 
-          props: { text: Array(5 + Math.random() * 10 >> 0).fill(0).map(_ => fakerLocale('en').hacker.phrase()).join(' ') },
+          component: index !== 0 ? 'p' : 'blockquote',
+          props: { text: Array(5 + Math.random() * 10 >> 0).fill(0).map(_ => fakerLocale('en').hacker.phrase()).join(' ') }
         })),
         ru: Array(10).fill(0).map((_, index) => ({
-          component: index != 0 ? 'p' : 'blockquote', 
+          component: index !== 0 ? 'p' : 'blockquote',
           props: { text: Array(5 + Math.random() * 10 >> 0).fill(0).map(_ => fakerLocale('ru').hacker.phrase()).join(' ') },
-          children: index != 0 ? null : [
+          children: index !== 0 ? null : [
             {
               component: 'code',
               props: {
@@ -97,15 +95,15 @@ module.exports = async function (app) {
           ]
         })),
         zh: Array(10).fill().map(_ => ({
-          component: index ? 'p' : 'blockquote', 
+          component: index ? 'p' : 'blockquote',
           props: { text: Array(5 + Math.random() * 10 >> 0).fill(0).map(_ => fakerLocale('zh_CN').hacker.phrase()).join(' ') }
-        })),
+        }))
       },
       authorId: persons[Math.random() * persons.length >> 0].id
     }))
   )
 
-  const comments = await createComment(
+  await createComment(
     Array(Math.random() * 50 >> 0).fill(0).map(_ => ({
       postId: posts[Math.random() * posts.length >> 0].id,
       authorId: persons[Math.random() * persons.length >> 0].id,
@@ -130,6 +128,6 @@ module.exports = async function (app) {
 
   await adminRole.principals.create({
     principalType: app.models.RoleMapping.USER,
-    principalId: adminPerson.id,
+    principalId: adminPerson.id
   })
 }

@@ -60,6 +60,7 @@ module.exports = function(Endpoint) {
       throw Boom.forbidden(`Incorrect authentication request (person not found)`)
     }
 
+    console.log(person)
     const { address } = person
     const latestNonce = person.latestNonce || 0
 

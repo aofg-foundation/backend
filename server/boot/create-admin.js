@@ -7,7 +7,7 @@ const adminData = { email, password, address: addresses[0] }
 /**
  * Create the first admin user if there are not users in the system
  */
-module.exports = function createAdmin(server) {
+module.exports = function createAdmin (server) {
   const Person = server.models.Person
   const Role = server.models.Role
   const RoleMapping = server.models.RoleMapping
@@ -24,7 +24,7 @@ module.exports = function createAdmin(server) {
           .then(roles => {
             if (roles.length < 1) {
               return Role.create({
-                name: 'ADMIN',
+                name: 'ADMIN'
               })
             }
 
@@ -40,7 +40,7 @@ module.exports = function createAdmin(server) {
       if (payload && payload.account && payload.role) {
         return payload.role.principals.create({
           principalType: RoleMapping.USER,
-          principalId: payload.account.id,
+          principalId: payload.account.id
         }).then(principal => {
           payload.principal = principal
           return payload
